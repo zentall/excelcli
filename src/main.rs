@@ -100,7 +100,7 @@ fn open_sheet<'a>(
 fn write_csv_header(wtr: &mut Writer<std::fs::File>, headers: &str, with_filename: bool) -> Result<(), Box<dyn Error>> {
     let mut headers_vec: Vec<&str> = headers.split(',').collect();
     if with_filename {
-        headers_vec.insert(0, "ファイル名");
+        headers_vec.insert(0, "source_file");
     }
     wtr.write_record(headers_vec)?;
     Ok(())
