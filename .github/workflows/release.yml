@@ -4,6 +4,10 @@ on:
   push:
     tags:
       - 'v*'  # 例: v1.0.0 でトリガー
+    workflow_dispatch:
+
+permissions:
+  contents: write
 
 jobs:
   build:
