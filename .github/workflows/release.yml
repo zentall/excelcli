@@ -4,7 +4,7 @@ on:
   push:
     tags:
       - 'v*'  # 例: v1.0.0 でトリガー
-    workflow_dispatch:
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -38,18 +38,28 @@ jobs:
       - name: Build
         run: cargo build --release --target ${{ matrix.target }}
 
-      - name: Rename Binary
+      - name: Prepare dist directory
+        run: mkdir dist
+
+      - name: Zip Binary
         run: |
-          mkdir dist
           if [ "${{ matrix.target }}" == "x86_64-pc-windows-gnu" ]; then
-            cp target/${{ matrix.target }}/release/excelcli.exe dist/excelcli.exe
+            cp target/${{ matrix.target }}/release/excelcli.exe dist/
+            cd dist
+            zip excelcli-${{ matrix.target }}.zip excelcli.exe
+            rm excelcli.exe
+            cd ..
           else
-            cp target/${{ matrix.target }}/release/excelcli dist/excelcli
+            cp target/${{ matrix.target }}/release/excelcli dist/
+            cd dist
+            zip excelcli-${{ matrix.target }}.zip excelcli
+            rm excelcli
+            cd ..
           fi
 
       - name: Upload Release Assets
         uses: softprops/action-gh-release@v2
         with:
-          files: dist/*
+          files: dist/*.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
