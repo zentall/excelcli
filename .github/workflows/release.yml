@@ -5,6 +5,9 @@ on:
     tags:
       - 'v*'  # 例: v1.0.0 でトリガー
 
+permissions:
+  contents: write  # ← これを追加
+  
 jobs:
   build:
     name: Build Binaries
