@@ -37,9 +37,9 @@ jobs:
         run: |
           mkdir dist
           if [ "${{ matrix.target }}" == "x86_64-pc-windows-gnu" ]; then
-            cp target/${{ matrix.target }}/release/your_program.exe dist/your_program-windows.exe
+            cp target/${{ matrix.target }}/release/excelcli.exe dist/excelcli.exe
           else
-            cp target/${{ matrix.target }}/release/your_program dist/your_program-linux
+            cp target/${{ matrix.target }}/release/excelcli dist/excelcli
           fi
 
       - name: Upload Release Assets
