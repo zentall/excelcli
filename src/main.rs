@@ -107,7 +107,6 @@ fn write_csv_header(wtr: &mut Writer<std::fs::File>, headers: &str, with_filenam
 }
 
 // 列範囲・行リストで抽出
-// 列範囲・行リストで抽出
 fn extract_col(
     file_pattern: &str,
     sheet_name: &str,
@@ -171,6 +170,7 @@ fn extract_col(
     println!("列ベース抽出結果を {} に出力しました。", output);
     Ok(())
 }
+
 
 // 行範囲・列リストで抽出
 fn extract_row(
